@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Pranav Pipariya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pranav Pipariya — ZK systems, cryptography, applied AI." />
+    <style>
+        @font-face {
+            font-family: 'Winchester Custom';
+            src: local('Winchester New ITC Std'), 
+                 local('Winchester New ITC Std Font'),
+                 url('font/winchester-new-itc-std-book.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --f: "Winchester Custom", "Winchester New ITC Std", Garamond, serif;
+            --bg: #0e0e0e;
+            --text: #e0e0e0;
+            --dim: #b8b3b3;
+            --faded: #6b6666;
+            --accent: #c45050;
+            --accent-h: #d86464;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--dim);
+            font-family: var(--f);
+            font-size: 24px;
+            line-height: 1.7;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            justify-content: center;
+            padding: 10vh 24px 12vh;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: var(--accent); color: var(--bg); }
+
+        .page {
+            max-width: 840px;
+            width: 100%;
+            transition: filter 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+        }
+
+        body.cmd-active .page {
+            filter: blur(5px);
+            transform: scale(0.97) translateY(-10px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .rv { 
+            opacity: 0; 
+            transform: translateY(10px); 
+            animation: up 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards; 
+        }
+        @keyframes up { to { opacity: 1; transform: translateY(0); } }
+        .r1 { animation-delay: 0.05s; }
+        .r2 { animation-delay: 0.2s; }
+        .r3 { animation-delay: 0.35s; }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .avatar-wrap {
+            flex-shrink: 0;
+            width: 96px;
+            height: 96px;
+            position: relative;
+        }
+
+        .avatar-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), rgba(196, 80, 80, 0.15));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .avatar-wrap:hover::before { opacity: 1; }
+
+        .avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 14px;
+            object-fit: cover;
+            filter: grayscale(0.3) contrast(1.05);
+            position: relative;
+            z-index: 1;
+            transition: filter 0.5s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .avatar:hover {
+            filter: grayscale(0) contrast(1.08);
+            transform: scale(1.03);
+        }
+
+        .name {
+            font-weight: 400;
+            font-size: 57px;
+            letter-spacing: -0.035em;
+            line-height: 1.05;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .tag {
+            font-size: 22px;
+            font-style: italic;
+            color: var(--faded);
+            margin-bottom: 0; 
+            line-height: 1.4;
+        }
+        .tag .ac { color: var(--accent); }
+
+        p { margin-bottom: 27px; }
+        strong { color: var(--text); font-weight: 400; }
+
+        .pl {
+            color: var(--accent);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s;
+        }
+        .pl::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0;
+            width: 100%; height: 1px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .pl:hover::after { transform: scaleX(1); }
+        .pl:hover { color: var(--accent-h); }
+
+        .pl .arr {
+            display: inline-block;
+            width: 15px; height: 15px;
+            margin-left: 3px;
+            vertical-align: middle;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative; top: -1px;
+        }
+        .pl:hover .arr { transform: translate(2px, -2px); }
+
+        .ml {
+            color: var(--dim);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s;
+        }
+        .ml::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0;
+            width: 100%; height: 1px;
+            background: var(--dim);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .ml:hover { color: var(--text); }
+        .ml:hover::after { transform: scaleX(1); }
+
+        .cmdk {
+            color: var(--accent);
+            background: rgba(196, 80, 80, 0.07);
+            padding: 2px 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(196, 80, 80, 0.12);
+            font-family: var(--f);
+            font-size: 0.88em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+            white-space: nowrap;
+        }
+        .cmdk:hover {
+            background: rgba(196, 80, 80, 0.13);
+            border-color: rgba(196, 80, 80, 0.25);
+        }
+
+        .cmd-result {
+            display: block;
+            color: var(--dim);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+        .cmd-result:last-child { margin-bottom: 0; }
+        .cmd-result-label { color: inherit; }
+        .cmd-result-meta { margin-left: 10px; }
+        .cmd-result.is-active,
+        .cmd-result:hover { color: var(--text); }
+        .cmd-result.is-active .cmd-result-label,
+        .cmd-result:hover .cmd-result-label { color: var(--accent); }
+        .cmd-empty { color: var(--faded); }
+
+        .dl-icon {
+            display: inline-block;
+            width: 15px; height: 15px;
+            vertical-align: middle;
+            margin-left: 3px;
+            transition: transform 0.2s;
+            position: relative; top: -1px;
+        }
+        .ml:hover .dl-icon { transform: translateY(2px); }
+
+        #cmd-layer {
+            position: fixed;
+            top: 14vh; left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            width: 100%; max-width: 840px;
+            padding: 0 24px; z-index: 100;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        body.cmd-active #cmd-layer {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+        .cmd-input {
+            width: 100%;
+            background: transparent;
+            border: none; outline: none;
+            color: var(--text);
+            font-family: var(--f);
+            font-size: 39px;
+            line-height: 1.2;
+            padding: 0; margin-bottom: 36px;
+        }
+        .cmd-input::placeholder { color: var(--faded); }
+        .cmd-response { font-size: 24px; color: var(--dim); line-height: 1.7; }
+        .tc {
+            display: inline-block;
+            width: 10px; height: 24px;
+            background: var(--accent);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+        @media (max-width: 600px) {
+            body { font-size: 16px; padding-top: 8vh; }
+            .name { font-size: 30px; }
+            .tag { font-size: 15px; }
+            .cmd-input { font-size: 22px; }
+            .avatar-wrap, .avatar { width: 54px; height: 54px; border-radius: 10px; }
+            .page { max-width: 560px; }
+            .header { gap: 16px; margin-bottom: 32px; }
+            p { margin-bottom: 18px; }
+            .pl .arr, .dl-icon { width: 10px; height: 10px; }
+            .cmd-response { font-size: 16px; }
+            .tc { width: 7px; height: 16px; }
+            #cmd-layer { max-width: 560px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page" id="sortable-page">
+
+        <div class="rv r1">
+            <div class="header">
+                <div class="avatar-wrap">
+                    <img class="avatar" src="https://i.pinimg.com/736x/16/b6/2a/16b62a70a9a8bc3fdc6e452abe73aa32.jpg" alt="Avatar" loading="eager" />
+                </div>
+                <div class="title-wrap">
+                    <h1 class="name">Pranav Pipariya</h1>
+                    <div class="tag">& I like building <span class="ac"> products </span> and writing <span class="ac"> proofs </span> </div>
+                </div>
+            </div>
+        </div>
+<div class="rv r2">
+            <p>Have you ever really thought about microwave buttons? They are fundamentally the only honest technology left. You press a button, it beeps, the plate spins. No "optimizing your experience," no async loading spinners. Just immediate, deterministic truth. It’s beautiful. If my software doesn't feel like a microwave, I get mildly upset.</p>
+
+            <p>I’m doing an Economics BS-MS at <strong>IIT Roorkee</strong>. I actually love the paranoid structure of game theory, but empirical hand-waving, not so much. Naturally, I spent my first two years doing web programming and math at <a href="https://paaciitr.com/" class="pl" target="_blank">PaAC<svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>. And because I do actually care about what happens after the code is shipped, I'm joining <a href="https://www.nobroker.in/" class="pl" target="_blank">NoBroker<svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a> this May as an incoming Product Analyst.</p>
+
+            <p>Lately, I've been deeply fascinated by <strong>Cryptography and ZK systems</strong>. I'll spare you the 40-minute podcast pitch about decentralizing trust, I just love the first principles and deterministic nature of it. I'm still wrapping my head around modern architectures. </p><p> When I'm not doing that, I build user centric stuff. I recently shipped <a href="https://github.com/PranavPipariya/anton" class="pl" target="_blank">Anton<svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a> (an orchestration engine running parallel LLM subagents to autonomously fix bugs) and <a href="https://github.com/PranavPipariya/whiteboard" class="pl" target="_blank">Whiteboard<svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a> (a voice-native tutor streaming RAG and KaTeX via WebSockets, with a custom VAD pipeline so you can actually interrupt it). My current focus is <a href="https://github.com/PranavPipariya/drift" class="pl" target="_blank">Drift<svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>, a gamified text editor where you which helps enhance yor thinking without breaking your flow, also gives you an assement of your writing.</p>
+        </div>
+
+        <div class="rv r3">
+            <p><strong>A brief intermission for the parsing scripts:</strong> <br>
+            Go, TypeScript, C++, Python, Solidity, ZK, Game Theory, System Architecture, WebSockets, RAG.</p>
+
+            <p>If you're building absurdly hard things, <a href="mailto:pranav_p@hs.iitr.ac.in" class="pl">drop an email</a> or <a href="https://cal.com/pranav-pipariya-ig5wyh/30min" class="pl" target="_blank">book a slot</a>. You can read my code on <a href="https://github.com/PranavPipariya" class="ml" target="_blank">github</a>, follow the rants on <a href="https://x.com/0xpermutations" class="ml" target="_blank">x</a>, or verify my corporate existence on <a href="https://linkedin.com/in/pranavpipariya" class="ml" target="_blank">linkedin</a>. Here's the <a href="resume/resume.pdf" class="ml" download>résumé<svg class="dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>. Or just hit <span class="cmdk" id="cmdTrigger">⌘K</span>.</p>
+        </div>
+    </div>
+    <!-- cmd-palette-start -->
+    <div id="cmd-layer">
+        <input type="text" id="cmd-input" class="cmd-input" placeholder="Jump somewhere..." autocomplete="off" spellcheck="false" />
+        <div class="cmd-response" id="cmd-response">
+            <a class="cmd-result" href="index.html" data-cmd-item data-search="landing home index pranav">
+                <span class="cmd-result-label">Home</span>
+                <span class="cmd-result-meta">home</span>
+            </a>
+            <a class="cmd-result" href="blog/index.html" data-cmd-item data-search="blog writing notes index">
+                <span class="cmd-result-label">Blog</span>
+                <span class="cmd-result-meta">blog</span>
+            </a>
+            <a class="cmd-result" href="blog/archive.html" data-cmd-item data-search="archive all posts list">
+                <span class="cmd-result-label">Archive</span>
+                <span class="cmd-result-meta">archive</span>
+            </a>
+            <a class="cmd-result" href="blog/posts/collatz-conjecture.html" data-cmd-item data-search="the collatz conjecture is basically math doing crowd work a short preview post on the collatz conjecture, which is what happens when arithmetic sounds simple and then refuses to leave. mar 29, 2026 math conjectures preview">
+                <span class="cmd-result-label">The Collatz Conjecture Is Basically Math Doing Crowd Work</span>
+                <span class="cmd-result-meta">Mar 29, 2026</span>
+            </a>
+            <p class="cmd-empty" id="cmd-empty" hidden>Can't match that one. But it's probably here.</p>
+        </div>
+    </div>
+    <!-- cmd-palette-end -->
+
+    <script>
+        var input = document.getElementById('cmd-input');
+        var cmdItems = Array.prototype.slice.call(document.querySelectorAll('[data-cmd-item]'));
+        var cmdTrigger = document.getElementById('cmdTrigger');
+        var emptyState = document.getElementById('cmd-empty');
+        var activeIndex = 0;
+
+        function visibleItems() {
+            return cmdItems.filter(function(item) { return !item.hidden; });
+        }
+
+        function setActive(index) {
+            var visible = visibleItems();
+            cmdItems.forEach(function(item) { item.classList.remove('is-active'); });
+            if (!visible.length) { activeIndex = 0; return; }
+            if (index < 0) index = visible.length - 1;
+            if (index >= visible.length) index = 0;
+            activeIndex = index;
+            visible[activeIndex].classList.add('is-active');
+        }
+
+        function filterItems(query) {
+            var normalized = (query || '').trim().toLowerCase();
+            cmdItems.forEach(function(item) {
+                var haystack = (item.dataset.search || '').toLowerCase();
+                item.hidden = normalized && haystack.indexOf(normalized) === -1;
+            });
+            if (emptyState) emptyState.hidden = visibleItems().length !== 0;
+            setActive(0);
+        }
+
+        function openLayer() {
+            document.body.classList.add('cmd-active');
+            input.value = '';
+            filterItems('');
+            input.focus();
+        }
+
+        function closeLayer() {
+            document.body.classList.remove('cmd-active');
+            input.blur();
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                document.body.classList.contains('cmd-active') ? closeLayer() : openLayer();
+                return;
+            }
+            if (e.key === 'Escape') { closeLayer(); return; }
+            if (!document.body.classList.contains('cmd-active')) return;
+            if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIndex + 1); }
+            if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIndex - 1); }
+            if (e.key === 'Enter') {
+                var visible = visibleItems();
+                if (visible.length) { e.preventDefault(); window.location.href = visible[activeIndex].getAttribute('href'); }
+            }
+        });
+
+        cmdTrigger.addEventListener('click', openLayer);
+
+        document.addEventListener('click', function(e) {
+            if (document.body.classList.contains('cmd-active') && !e.target.closest('#cmd-layer') && !e.target.closest('#cmdTrigger')) {
+                closeLayer();
+            }
+        });
+
+        input.addEventListener('input', function(e) { filterItems(e.target.value); });
+
+        filterItems('');
+
+        var avatarWrap = document.querySelector('.avatar-wrap');
+        var avatar = document.querySelector('.avatar');
+
+        avatarWrap.addEventListener('mousemove', function(e) {
+            var rect = avatarWrap.getBoundingClientRect();
+            var x = (e.clientX - rect.left) / rect.width - 0.5;
+            var y = (e.clientY - rect.top) / rect.height - 0.5;
+            avatar.style.transform = 'scale(1.03) rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg)';
+        });
+
+        avatarWrap.addEventListener('mouseleave', function() {
+            avatar.style.transform = '';
+        });
+    </script>
+</body>
+</html>
