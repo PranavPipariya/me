@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-labelledby="t d">
+  <title id="t">Positions as numbers interleave concurrent typing</title>
+  <desc id="d">Alice types Hello and Bob types Hi into the same empty document. Each new letter takes the number halfway between its neighbours, so both H's land on 0.5 and both second letters on 0.75. Ties go to the lower replica, Alice, so the letters zip together and both replicas read HHeillo.</desc>
+  <style>
+    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+    .note { fill: #666; }
+    .who { fill: #111; font-weight: 600; }
+    .hot { fill: #ff3b3b; font-weight: 600; }
+    .big { font-size: 22px; }
+    .guide { stroke: #ccc; stroke-width: 1; stroke-dasharray: 3 4; }
+    .rule { stroke: #999; stroke-width: 1; }
+    .tie { fill: #ff3b3b; fill-opacity: 0.06; stroke: #ff3b3b; stroke-width: 1.25; }
+    @media (prefers-color-scheme: dark) {
+      .note { fill: #888; }
+      .who { fill: #e8e8e8; }
+      .hot { fill: #ff6b6b; }
+      .guide { stroke: #444; }
+      .rule { stroke: #666; }
+      .tie { fill: #ff6b6b; fill-opacity: 0.1; stroke: #ff6b6b; }
+    }
+  </style>
+
+  <text class="note" x="20" y="34">position</text>
+  <text class="note" x="170" y="34" text-anchor="middle">0.5</text>
+  <line class="guide" x1="170" y1="46" x2="170" y2="196"/>
+  <text class="note" x="285" y="34" text-anchor="middle">0.75</text>
+  <line class="guide" x1="285" y1="46" x2="285" y2="196"/>
+  <text class="note" x="400" y="34" text-anchor="middle">0.875</text>
+  <line class="guide" x1="400" y1="46" x2="400" y2="196"/>
+  <text class="note" x="515" y="34" text-anchor="middle">0.9375</text>
+  <line class="guide" x1="515" y1="46" x2="515" y2="196"/>
+  <text class="note" x="630" y="34" text-anchor="middle">0.96875</text>
+  <line class="guide" x1="630" y1="46" x2="630" y2="196"/>
+  <rect class="tie" x="126" y="56" width="88" height="140" rx="4"/>
+  <text class="hot" x="170" y="214" text-anchor="middle">tie</text>
+  <rect class="tie" x="241" y="56" width="88" height="140" rx="4"/>
+  <text class="hot" x="285" y="214" text-anchor="middle">tie</text>
+  <text class="note" x="20" y="90">alice</text>
+  <text class="note" x="20" y="140">bob</text>
+  <text class="who big" x="170" y="92" text-anchor="middle">H</text>
+  <text class="who big" x="285" y="92" text-anchor="middle">e</text>
+  <text class="who big" x="400" y="92" text-anchor="middle">l</text>
+  <text class="who big" x="515" y="92" text-anchor="middle">l</text>
+  <text class="who big" x="630" y="92" text-anchor="middle">o</text>
+  <text class="hot big" x="170" y="142" text-anchor="middle">H</text>
+  <text class="hot big" x="285" y="142" text-anchor="middle">i</text>
+  <text class="note" x="20" y="182">sorted</text>
+  <text class="big" x="170" y="184" text-anchor="middle"><tspan class="who">H</tspan><tspan class="hot">H</tspan></text>
+  <text class="big" x="285" y="184" text-anchor="middle"><tspan class="who">e</tspan><tspan class="hot">i</tspan></text>
+  <text class="who big" x="400" y="184" text-anchor="middle">l</text>
+  <text class="who big" x="515" y="184" text-anchor="middle">l</text>
+  <text class="who big" x="630" y="184" text-anchor="middle">o</text>
+  <line class="rule" x1="20" y1="236" x2="700" y2="236"/>
+  <text class="note" x="20" y="274">both read</text>
+  <text class="big" x="170" y="276"><tspan class="who">H</tspan><tspan class="hot">H</tspan><tspan class="who">e</tspan><tspan class="hot">i</tspan><tspan class="who">l</tspan><tspan class="who">l</tspan><tspan class="who">o</tspan></text>
+  <text class="note" x="330" y="274">ties go to the lower replica</text>
+</svg>

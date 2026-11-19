@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 290" role="img" aria-labelledby="t d">
+  <title id="t">Eg-walker builds a CRDT only where edits were concurrent</title>
+  <desc id="d">An event graph. Edits before the first critical version and after the second are applied straight to the text. Between them, Alice and Bob edit offline at the same time; only that region is replayed through a temporary CRDT, which is then thrown away.</desc>
+  <style>
+    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+    .note { fill: #666; }
+    .who { fill: #111; font-weight: 600; }
+    .hot { fill: #ff3b3b; font-weight: 600; }
+    .seq { stroke: #999; stroke-width: 1.5; fill: none; }
+    .con { stroke: #ff3b3b; stroke-width: 1.75; fill: none; }
+    .n  { fill: #fff; stroke: #999; stroke-width: 1.5; }
+    .nc { fill: #ffe3e3; stroke: #ff3b3b; stroke-width: 2; }
+    .crit { stroke: #999; stroke-width: 1; stroke-dasharray: 4 4; }
+    .region { fill: #ff3b3b; fill-opacity: 0.05; }
+    @media (prefers-color-scheme: dark) {
+      .note { fill: #888; }
+      .who { fill: #e8e8e8; }
+      .hot { fill: #ff6b6b; }
+      .seq { stroke: #666; }
+      .con { stroke: #ff6b6b; }
+      .n  { fill: #0d0d0d; stroke: #777; }
+      .nc { fill: #3a1717; stroke: #ff6b6b; }
+      .crit { stroke: #555; }
+      .region { fill: #ff6b6b; fill-opacity: 0.08; }
+    }
+  </style>
+
+  <!-- concurrent region -->
+  <rect class="region" x="210" y="40" width="283" height="190"/>
+  <line class="crit" x1="210" y1="32" x2="210" y2="238"/>
+  <line class="crit" x1="493" y1="32" x2="493" y2="238"/>
+  <text class="note" x="210" y="22" text-anchor="middle">critical version</text>
+  <text class="note" x="493" y="22" text-anchor="middle">critical version</text>
+
+  <!-- edges -->
+  <path class="seq" d="M60 135 H180"/>
+  <path class="con" d="M180 135 L274 85 H369 L454 135"/>
+  <path class="con" d="M180 135 L274 185 H369 L454 135"/>
+  <path class="seq" d="M454 135 H660"/>
+
+  <!-- nodes -->
+  <circle class="n" cx="60"  cy="135" r="8"/>
+  <circle class="n" cx="120" cy="135" r="8"/>
+  <circle class="n" cx="180" cy="135" r="8"/>
+  <circle class="nc" cx="274" cy="85"  r="8"/>
+  <circle class="nc" cx="369" cy="85"  r="8"/>
+  <circle class="nc" cx="274" cy="185" r="8"/>
+  <circle class="nc" cx="369" cy="185" r="8"/>
+  <circle class="nc" cx="454" cy="135" r="8"/>
+  <circle class="n" cx="540" cy="135" r="8"/>
+  <circle class="n" cx="600" cy="135" r="8"/>
+  <circle class="n" cx="660" cy="135" r="8"/>
+
+  <!-- labels -->
+  <text class="who" x="321" y="66"  text-anchor="middle">Alice, offline</text>
+  <text class="who" x="321" y="214" text-anchor="middle">Bob, offline</text>
+  <text class="note" x="120" y="262" text-anchor="middle">applied straight</text>
+  <text class="note" x="120" y="280" text-anchor="middle">to the text</text>
+  <text class="hot"  x="351" y="262" text-anchor="middle">CRDT built here,</text>
+  <text class="hot"  x="351" y="280" text-anchor="middle">then thrown away</text>
+  <text class="note" x="600" y="262" text-anchor="middle">applied straight</text>
+  <text class="note" x="600" y="280" text-anchor="middle">to the text</text>
+</svg>
