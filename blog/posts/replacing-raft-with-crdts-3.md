@@ -110,4 +110,4 @@ That's part 3. Positions-as-numbers interleave, positions-as-neighbours don't, a
 
 At this point I had a working collaborative text CRDT. Which is exactly when I made the mistake of measuring it.
 
-[Part 4: Eg-walker](post.html?post=replacing-raft-with-crdts-4)
+Part 4, Eg-walker, is coming soon.
