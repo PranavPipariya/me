@@ -765,16 +765,10 @@ body.preview-portfolio .header-image {
 /* Connect page: a plain list, no arrows */
 .content ul.socials li::before { content: none; }
 
-/* ── Resume page ─────────────────────────────────────────────────────── */
-.cv-item { margin: 18px 0 22px; }
-.cv-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; }
-.cv-name { font-weight: 600; }
-.cv-date, .cv-sub, .cv-label { color: #666; font-size: 14px; }
-.cv-sub { margin-top: 2px; }
-.cv-item ul { margin-top: 8px; }
-.cv-item li { line-height: 1.6; padding-left: 1.7em; text-indent: -1.7em; }
-.content ul.cv-skills li::before { content: none; }
-.cv-label { display: inline-block; min-width: 13ch; }
+/* ── Work page ───────────────────────────────────────────────────────── */
+.content ul.work li { margin-bottom: 18px; line-height: 1.6; padding-left: 1.7em; text-indent: -1.7em; }
+.work-detail { display: block; text-indent: 0; font-size: 13px; color: #888; margin-top: 2px; }
+.work-coda { color: #666; margin-top: 28px; }
 @media (prefers-color-scheme: dark) {
-    .cv-date, .cv-sub, .cv-label { color: #888; }
+    .work-coda { color: #888; }
 }
