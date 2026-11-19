@@ -765,10 +765,3 @@ body.preview-portfolio .header-image {
 /* Connect page: a plain list, no arrows */
 .content ul.socials li::before { content: none; }
 
-/* ── Work page ───────────────────────────────────────────────────────── */
-.content ul.work li { margin-bottom: 18px; line-height: 1.6; padding-left: 1.7em; text-indent: -1.7em; }
-.work-detail { display: block; text-indent: 0; font-size: 13px; color: #888; margin-top: 2px; }
-.work-coda { color: #666; margin-top: 28px; }
-@media (prefers-color-scheme: dark) {
-    .work-coda { color: #888; }
-}
