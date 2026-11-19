@@ -105,7 +105,7 @@ That's part 1. Raft makes everyone agree, but it can't let a laptop on a plane k
 
 Doing that for text sounded too hard to attempt head-on, so I made the problem smaller. Next time: a counter and a set, the smallest data structures that never need anyone to agree.
 
-[Part 2: Counters and sets →](post.html?post=replacing-raft-with-crdts-2)
+[Part 2: Counters and sets](post.html?post=replacing-raft-with-crdts-2)
 
 ## Appendix: why you can't just tune Raft
 

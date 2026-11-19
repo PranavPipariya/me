@@ -247,10 +247,10 @@
             render();
             const a = A.text(), b = B.text();
             if (a === b) {
-                status.textContent = `→ both read “${a}”`;
+                status.textContent = `both read “${a}”`;
                 status.className = 'demo-status ok';
             } else {
-                status.textContent = `→ out of sync: alice has “${a}”, bob has “${b}”`;
+                status.textContent = `out of sync: alice has “${a}”, bob has “${b}”`;
                 status.className = 'demo-status bad';
             }
         }
@@ -323,7 +323,7 @@
             row.append(input, note);
             input.addEventListener('input', () => type(i, input.value));
             input.addEventListener('focus', () => {
-                if (!nodes[i].leads) status(`→ node ${i + 1} is a follower. every write goes through the leader, node ${leader + 1}.`);
+                if (!nodes[i].leads) status(`node ${i + 1} is a follower. every write goes through the leader, node ${leader + 1}.`);
             });
             return { input, note };
         });
@@ -354,10 +354,10 @@
             if (i === plane) {
                 // Accepted into the log, but there's no majority to commit it.
                 n.pending.push(...ops);
-                status('→ no majority, so nothing commits. node ' + (i + 1) + ' still shows “' + n.text + '”', true);
+                status('no majority, so nothing commits. node ' + (i + 1) + ' still shows “' + n.text + '”', true);
             } else {
                 nodes.forEach((m, j) => { if (j !== plane) m.text = ops.reduce(applyOp, m.text); });
-                status(`→ committed on ${plane < 0 ? 'all three nodes' : 'the two nodes on the ground'}`);
+                status(`committed on ${plane < 0 ? 'all three nodes' : 'the two nodes on the ground'}`);
             }
             const caret = rows[i].input.selectionStart;
             render();
@@ -372,7 +372,7 @@
             nodes[leader].term = term;
             nodes.forEach((n, i) => { if (i !== plane) n.term = term; });
             render();
-            status(`→ the ground stops hearing from node ${plane + 1} and elects node ${leader + 1} (term ${term}). node ${plane + 1} still thinks it's in charge.`);
+            status(`the ground stops hearing from node ${plane + 1} and elects node ${leader + 1} (term ${term}). node ${plane + 1} still thinks it's in charge.`);
         }
 
         function land() {
@@ -385,8 +385,8 @@
             const who = plane + 1;
             plane = -1;
             render();
-            if (lost) status(`→ node ${who} sees term ${term} and steps down. its uncommitted “${lost}” is gone. every node reads “${n.text}”.`, true);
-            else status(`→ node ${who} sees term ${term} and steps down. every node reads “${n.text}”.`);
+            if (lost) status(`node ${who} sees term ${term} and steps down. its uncommitted “${lost}” is gone. every node reads “${n.text}”.`, true);
+            else status(`node ${who} sees term ${term} and steps down. every node reads “${n.text}”.`);
         }
 
         function reset() {
@@ -491,16 +491,16 @@
             M()[what](s);
             render();
             const name = 'ab'[id];
-            if (what === 'add' && !M().has(s)) status(`→ ${name} can't add milk: there's a tombstone for it`, true);
-            else if (what === 'remove' && !before) status(`→ ${name} has no milk to remove`);
-            else status(`→ ${name} ${what === 'add' ? 'adds' : 'removes'} milk`);
+            if (what === 'add' && !M().has(s)) status(`${name} can't add milk: there's a tombstone for it`, true);
+            else if (what === 'remove' && !before) status(`${name} has no milk to remove`);
+            else status(`${name} ${what === 'add' ? 'adds' : 'removes'} milk`);
         }
 
         function sync() {
             const m = M().merge(reps[0], reps[1]);
             reps = [0, 1].map((id) => ({ ...JSON.parse(JSON.stringify(m)), id }));
             render();
-            status(`→ both: ${M().show(reps[0])}`);
+            status(`both: ${M().show(reps[0])}`);
             return M().has(reps[0]);
         }
 
@@ -524,13 +524,13 @@
                 () => { removeStuck = !sync(); },
                 () => { act(0, 'add'); readded = M().has(reps[0]); },
                 () => sync(),
-                () => { act(0, 'remove'); act(1, 'add'); status('→ at the same time: a removes milk, b adds it'); },
+                () => { act(0, 'remove'); act(1, 'add'); status('at the same time: a removes milk, b adds it'); },
                 () => {
                     addWon = sync();
-                    if (!removeStuck) status('→ a plain remove never stuck: syncing brought the milk back', true);
-                    else if (!readded) status('→ removes stick, but milk can never be added back', true);
-                    else if (addWon) status('→ removes stick, and the concurrent add wins');
-                    else status('→ the concurrent add was lost', true);
+                    if (!removeStuck) status('a plain remove never stuck: syncing brought the milk back', true);
+                    else if (!readded) status('removes stick, but milk can never be added back', true);
+                    else if (addWon) status('removes stick, and the concurrent add wins');
+                    else status('the concurrent add was lost', true);
                 },
             ];
             const tick = () => { steps.shift()(); if (steps.length) timer = setTimeout(tick, 1000); };

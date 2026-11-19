@@ -93,12 +93,6 @@ body {
     margin-bottom: 6px;
 }
 
-.content ul li::before {
-    content: "→ ";
-    color: #ff3b3b;
-    margin-right: 8px;
-}
-
 .date {
     color: #666;
     font-size: 14px;
@@ -352,10 +346,6 @@ body.preview-portfolio .content a:hover {
     background: var(--preview-accent);
     color: var(--preview-accent-contrast);
     border-bottom-color: var(--preview-accent);
-}
-
-body.preview-portfolio .content ul li::before {
-    color: var(--preview-accent);
 }
 
 body.preview-portfolio .project-line:hover {
@@ -762,6 +752,9 @@ body.preview-portfolio .header-image {
     .content td { border-bottom-color: #222; }
 }
 
-/* Connect page: a plain list, no arrows */
-.content ul.socials li::before { content: none; }
 
+
+/* Lists: plain lines on pages, small grey dots inside posts. */
+.content ul li { margin-bottom: 10px; }
+#post-content ul { list-style: disc; padding-left: 1.3em; }
+#post-content ul li::marker { color: #999; }

@@ -133,4 +133,4 @@ That's part 2. A CRDT is a merge that doesn't care about order, routing or repet
 
 Next time: text, where the positions themselves shift under your feet.
 
-[Part 3: Text that doesn't interleave →](post.html?post=replacing-raft-with-crdts-3)
+[Part 3: Text that doesn't interleave](post.html?post=replacing-raft-with-crdts-3)
