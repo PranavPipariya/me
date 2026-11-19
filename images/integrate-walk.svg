@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-labelledby="t d">
+  <title id="t">How integrate places Bob's H</title>
+  <desc id="d">Alice has typed Hello. Bob's H arrives with origin left at the start and origin right at the end, so all of Hello is the gap. Alice's H has the same origins, so it is a sibling and goes first because Alice is agent 1. Alice's e, l, l and o each have an origin left inside the gap, so they belong to Alice's run and Bob's H walks past them. Bob's H is inserted after the o, giving HelloH, and then Hi.</desc>
+  <style>
+    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+    .note { fill: #666; }
+    .who { fill: #111; font-weight: 600; }
+    .hot { fill: #ff3b3b; font-weight: 600; }
+    .big { font-size: 22px; }
+    .arc { stroke: #999; stroke-width: 1.25; fill: none; }
+    .ins { stroke: #ff3b3b; stroke-width: 2; }
+    .gap { fill: #ff3b3b; fill-opacity: 0.05; stroke: #ff3b3b; stroke-opacity: 0.4; stroke-dasharray: 4 4; }
+    .head { fill: #999; }
+    @media (prefers-color-scheme: dark) {
+      .note { fill: #888; }
+      .who { fill: #e8e8e8; }
+      .hot { fill: #ff6b6b; }
+      .arc { stroke: #777; }
+      .head { fill: #777; }
+      .ins { stroke: #ff6b6b; }
+      .gap { fill: #ff6b6b; fill-opacity: 0.08; stroke: #ff6b6b; }
+    }
+  </style>
+  <defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="head" d="M0 0 L8 4 L0 8 z"/></marker></defs>
+  <text class="note" x="20" y="26"><tspan class="hot">Bob's H</tspan> arrives: origin left = start, origin right = end.</text>
+  <text class="note" x="20" y="46">Everything between them is the gap. Arrows point at each letter's origin left.</text>
+  <rect class="gap" x="105" y="70" width="450" height="128" rx="4"/>
+
+  <text class="note" x="60" y="170" text-anchor="middle">start</text>
+  <text class="note" x="600" y="170" text-anchor="middle">end</text>
+  <text class="who big" x="150" y="172" text-anchor="middle">H</text>
+  <path class="arc" d="M150 146 C150 100, 66 100, 66 146" marker-end="url(#ah)"/>
+  <text class="who big" x="230" y="172" text-anchor="middle">e</text>
+  <path class="arc" d="M230 146 C230 100, 156 100, 156 146" marker-end="url(#ah)"/>
+  <text class="who big" x="310" y="172" text-anchor="middle">l</text>
+  <path class="arc" d="M310 146 C310 100, 236 100, 236 146" marker-end="url(#ah)"/>
+  <text class="who big" x="390" y="172" text-anchor="middle">l</text>
+  <path class="arc" d="M390 146 C390 100, 316 100, 316 146" marker-end="url(#ah)"/>
+  <text class="who big" x="470" y="172" text-anchor="middle">o</text>
+  <path class="arc" d="M470 146 C470 100, 396 100, 396 146" marker-end="url(#ah)"/>
+  <text class="who" x="150" y="192" text-anchor="middle">sibling</text>
+  <text class="note" x="230" y="192" text-anchor="middle">skip</text>
+  <text class="note" x="310" y="192" text-anchor="middle">skip</text>
+  <text class="note" x="390" y="192" text-anchor="middle">skip</text>
+  <text class="note" x="470" y="192" text-anchor="middle">skip</text>
+  <line class="ins" x1="515" y1="150" x2="515" y2="180"/>
+  <text class="hot" x="515" y="216" text-anchor="middle">insert here</text>
+  <text class="who" x="20" y="252">sibling</text><text class="note" x="100" y="252">same origins as Bob's H. Alice is agent 1, so she goes first.</text>
+  <text class="note" x="20" y="276" font-weight="600">skip</text><text class="note" x="100" y="276">origin left is inside the gap: part of Alice's run, walk past it.</text>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 316" role="img" aria-labelledby="t d">
+  <title id="t">Bytes per character of the final document</title>
+  <desc id="d">Across three editing traces, the list CRDT keeps 34 to 56 bytes per character in memory. Eg-walker's event graph takes 2.6 to 3.0 bytes per character on disk, and it keeps just the text, 1 byte per character, in memory.</desc>
+  <style>
+    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #444; font-size: 13px; }
+    .trace { fill: #111; font-size: 15px; font-weight: 600; }
+    .edits { fill: #666; font-size: 12px; }
+    .val { fill: #666; font-size: 12px; }
+    .val.hot { fill: #111; font-weight: 600; }
+    .crdt { fill: #ff3b3b; }
+    .graph { fill: #aaa; }
+    .txt { fill: #111; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #aaa; }
+      .trace, .val.hot { fill: #e8e8e8; }
+      .edits, .val { fill: #888; }
+      .crdt { fill: #ff6b6b; }
+      .graph { fill: #555; }
+      .txt { fill: #e8e8e8; }
+    }
+  </style>
+
+  <!-- legend -->
+  <rect class="crdt" x="0" y="6" width="12" height="12"/>
+  <text x="18" y="16">List CRDT (memory)</text>
+  <rect class="graph" x="200" y="6" width="12" height="12"/>
+  <text x="218" y="16">Eg-walker graph (disk)</text>
+  <rect class="txt" x="430" y="6" width="12" height="12"/>
+  <text x="448" y="16">Eg-walker text (memory)</text>
+
+  <!-- automerge-paper -->
+  <g transform="translate(0,56)">
+    <text class="trace" x="0" y="26">automerge-paper</text>
+    <text class="edits" x="0" y="46">259,778 edits</text>
+    <rect class="crdt"  x="170" y="0"  width="470" height="16"/>
+    <rect class="graph" x="170" y="24" width="22"  height="16"/>
+    <rect class="txt"   x="170" y="48" width="8.5" height="16"/>
+    <text class="val hot" x="648" y="12">55.6 B</text>
+    <text class="val" x="200" y="36">2.6 B</text>
+    <text class="val" x="187" y="60">1.0 B</text>
+  </g>
+
+  <!-- friendsforever -->
+  <g transform="translate(0,152)">
+    <text class="trace" x="0" y="26">friendsforever</text>
+    <text class="edits" x="0" y="46">26,078 edits</text>
+    <rect class="crdt"  x="170" y="0"  width="300" height="16"/>
+    <rect class="graph" x="170" y="24" width="23"  height="16"/>
+    <rect class="txt"   x="170" y="48" width="8.5" height="16"/>
+    <text class="val hot" x="478" y="12">35.5 B</text>
+    <text class="val" x="201" y="36">2.7 B</text>
+    <text class="val" x="187" y="60">1.0 B</text>
+  </g>
+
+  <!-- clownschool -->
+  <g transform="translate(0,248)">
+    <text class="trace" x="0" y="26">clownschool</text>
+    <text class="edits" x="0" y="46">24,326 edits</text>
+    <rect class="crdt"  x="170" y="0"  width="291" height="16"/>
+    <rect class="graph" x="170" y="24" width="26"  height="16"/>
+    <rect class="txt"   x="170" y="48" width="8.5" height="16"/>
+    <text class="val hot" x="469" y="12">34.4 B</text>
+    <text class="val" x="204" y="36">3.0 B</text>
+    <text class="val" x="187" y="60">1.0 B</text>
+  </g>
+</svg>
