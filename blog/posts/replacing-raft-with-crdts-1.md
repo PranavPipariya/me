@@ -11,7 +11,7 @@ This is the first of four posts about building a collaborative text editor that 
 1. **Raft on a plane** (this post): why consensus is the wrong tool for typing.
 2. [Counters and sets](post.html?post=replacing-raft-with-crdts-2): the smallest CRDTs, and why deleting is hard.
 3. [Text that doesn't interleave](post.html?post=replacing-raft-with-crdts-3): giving every character a place that never moves.
-4. [Eg-walker](post.html?post=replacing-raft-with-crdts-4): keeping the CRDT around only when you need it.
+4. Eg-walker (coming soon): keeping the CRDT around only when you need it.
 
 You don't need to know Raft, CRDTs or Go to follow along. Every snippet is cut from [one Go module](https://github.com/PranavPipariya/crdt-editor) that compiles and passes its tests (Go 1.24), trimmed to the lines that matter. Every number is measured.
 
