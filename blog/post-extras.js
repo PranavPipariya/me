@@ -115,9 +115,9 @@
     }
 
     const MODES = {
-        index: { label: 'indices', make: () => new IndexDoc(0), note: 'The original bug: each edit is sent as “insert c at i” and replayed as-is.' },
-        frac: { label: 'numbers', make: () => new FracDoc(0), note: 'Attempt 2: each character gets a number halfway between its neighbours.' },
-        fugue: { label: 'neighbours', make: () => new List(0), note: 'Attempt 3: each character remembers what it was typed next to (FugueMax).' },
+        index: { label: 'indices', make: () => new IndexDoc(0) },
+        frac: { label: 'numbers', make: () => new FracDoc(0) },
+        fugue: { label: 'neighbours', make: () => new List(0) },
     };
 
     const PRESETS = {
@@ -339,8 +339,8 @@
                 r.input.value = n.text;
                 r.input.readOnly = !n.leads;
                 r.input.classList.toggle('demo-readonly', !n.leads);
-                let note = n.leads ? `leader · term ${n.term}` : 'follower';
-                if (i === plane) note = `on a plane · term ${n.term}` + (n.pending.length ? ` · ${n.pending.length} waiting` : '');
+                let note = n.leads ? `leader, term ${n.term}` : 'follower';
+                if (i === plane) note = `on a plane, term ${n.term}` + (n.pending.length ? `, ${n.pending.length} waiting` : '');
                 r.note.textContent = note;
                 r.note.classList.toggle('quiet', i !== plane);
             });

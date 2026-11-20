@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{TITLE}} - Pranav Pipariya</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="{{EXCERPT}}" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script src="post-extras.js" defer></script>
+    </head>
+
+    <body>
+        <main class="container">
+            <header>
+<!--tree:post-->
+
+                <div class="divider">
+                    ................................................................................
+                </div>
+            </header>
+
+            <article class="content" id="post-content">
+{{CONTENT}}
+            </article>
+
+{{RECEIPT}}
+        </main>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                if (window.enhancePost) enhancePost(document.getElementById('post-content'));
+            });
+        </script>
+        <script src="../micro.js"></script>
+    </body>
+</html>
