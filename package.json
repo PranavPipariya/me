@@ -1,0 +1,12 @@
+{
+  "name": "pranavpipariya-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "highlight.js": "11.11.1",
+    "marked": "15.0.12"
+  }
+}
