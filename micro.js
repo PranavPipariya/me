@@ -11,7 +11,7 @@
             const kb = Math.max(1, Math.round(bytes / 1024));
             const ms = nav ? Math.round(nav.domContentLoadedEventEnd) : 0;
             const cookies = document.cookie ? document.cookie.split(';').length : 0;
-            receipt.textContent = `${kb} KB, 0 trackers, ${cookies} cookies, rendered in ${ms} ms, `;
+            receipt.textContent = `${kb} KB, 0 trackers, ${cookies} cookies, rendered in ${ms} ms`;
         };
         if (document.readyState === 'complete') write();
         else window.addEventListener('load', write);

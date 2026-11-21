@@ -452,11 +452,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #ff3b3b; outline-offs
     .tree .file-meta { display: block; padding-left: 8ch; }
 }
 .receipt:has([data-receipt]:empty) { visibility: hidden; }
-.receipt a { text-decoration: underline; text-decoration-color: #ccc; text-underline-offset: 3px; }
-.receipt a:hover { color: #ff3b3b; text-decoration-color: #ff3b3b; }
 
 .tree .here.empty { color: #bbb; }
 @media (prefers-color-scheme: dark) { .tree .here.empty { color: #555; } }
-.tree .file-meta .changed { color: inherit; background: none; text-decoration: underline; text-decoration-color: #ccc; text-underline-offset: 3px; }
-.tree .file-meta .changed:hover { color: #ff3b3b; text-decoration-color: #ff3b3b; }
 .missing { color: #ff3b3b; }

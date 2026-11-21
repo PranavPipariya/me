@@ -32,7 +32,6 @@ marked.use({
 const ROOT = new URL('..', import.meta.url).pathname;
 const OUT = join(ROOT, '_site');
 const SITE = 'https://pranavpipariya.com';
-const REPO = 'https://github.com/PranavPipariya/me';
 const git = (cmd) => execSync(`git ${cmd}`, { cwd: ROOT }).toString().trim();
 const sha = process.env.GITHUB_SHA || git('rev-parse HEAD');
 
@@ -70,10 +69,10 @@ const emptyLine = (label) => {
 };
 
 // ── shared page parts ───────────────────────────────────────────────────────
-const receipt = (source) => `            <div class="divider footer-divider">
+const receipt = `            <div class="divider footer-divider">
                 ................................................................................
             </div>
-            <footer class="receipt"><span data-receipt></span><a href="${source}" target="_blank">source</a></footer>`;
+            <footer class="receipt"><span data-receipt></span></footer>`;
 
 const person = {
     '@context': 'https://schema.org',
@@ -90,13 +89,13 @@ const headExtras = (isHome) => [
 ].join('\n');
 
 // Every link and asset becomes absolute and clean, wherever the page ends up.
-const finish = (html, { isHome = false, source = REPO } = {}) => html
+const finish = (html, { isHome = false } = {}) => html
     .replace(/(?:\.\.\/)?(?:blog\/)?post\.html\?post=([\w-]+)/g, (_, slug) => postPath(slug))
     .replace(/href="(?:\.\.?\/)?theme\.css"/g, 'href="/theme.css"')
     .replace(/src="(?:\.\.?\/)?micro\.js"/g, 'src="/micro.js"')
     .replace(/src="post-extras\.js"/g, 'src="/writings/post-extras.js"')
     .replace('</head>', () => `${headExtras(isHome)}\n</head>`)
-    .replace(/ *<!--receipt-->/, () => receipt(source))
+    .replace(/ *<!--receipt-->/, () => receipt)
     .replace(/<!--tree:([\w/-]*)(:empty)?-->/, (_, current, empty) =>
         empty ? treeHtml(current, emptyLine(current), current) : treeHtml(current || null));
 
@@ -149,8 +148,7 @@ const escape = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/
 function timer(markdown) {
     const prose = markdown.replace(/```[\s\S]*?```/g, '').replace(/<[^>]+>/g, '');
     const words = prose.split(/\s+/).filter(Boolean).length;
-    const seconds = Math.max(30, Math.ceil((words / 230) * 60 / 30) * 30);
-    return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+    return `${Math.max(1, Math.round(words / 230))} min`;
 }
 
 const posts = [];
@@ -168,13 +166,6 @@ for (const file of readdirSync(join(ROOT, 'blog', 'posts')).filter((f) => f.ends
         body = m[2];
     }
     const post = { slug, title: meta.title || slug, date: meta.date || '', excerpt: meta.excerpt || '', time: timer(body) };
-    // Honest history: when the post last changed, from git. The first commit
-    // only added the file; edits are the commits after it.
-    const commits = git(`log --format=%cs -- blog/posts/${file}`).split('\n').filter(Boolean);
-    const changed = commits.length > 1 ? commits[0] : '';
-    const history = changed && changed > post.date
-        ? `  <a class="changed" href="${REPO}/commits/main/blog/posts/${file}" target="_blank">changed ${changed}</a>`
-        : '';
     const page = template
         .replaceAll('{{TITLE}}', escape(post.title))
         .replaceAll('{{EXCERPT}}', escape(post.excerpt))
@@ -184,8 +175,8 @@ for (const file of readdirSync(join(ROOT, 'blog', 'posts')).filter((f) => f.ends
         .replace('{{CONTENT}}', () => marked.parse(body))
         .replace('{{RECEIPT}}', () => '<!--receipt-->')
         .replace('<!--tree:post-->', () => treeHtml(null,
-            `                    <div class="branch"><span class="twig">│   └── </span><span class="here">${slug}.md</span><span class="file-meta">  ${post.date}${history}  <span title="Reading time">${post.time}</span></span></div>`));
-    writePage(postPath(slug), finish(page, { source: `${REPO}/blob/main/blog/posts/${file}` }));
+            `                    <div class="branch"><span class="twig">│   └── </span><span class="here">${slug}.md</span><span class="file-meta">  ${post.date}  <span title="Reading time">${post.time}</span></span></div>`));
+    writePage(postPath(slug), finish(page));
     // Its .txt twin is the markdown itself, minus the front matter.
     write(`writings/${slug}.txt`, `${post.title}\n${post.date}  ${post.time}\n\n${body.trim()}\n`);
     posts.push(post);
